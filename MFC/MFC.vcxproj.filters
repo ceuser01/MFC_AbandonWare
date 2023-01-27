@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="DLG">
+      <UniqueIdentifier>{1bb1ecbd-8335-4072-8b9c-8d8af0b17c36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DLG\Headerfiles">
+      <UniqueIdentifier>{886f3e7f-00f1-49da-ad3d-4d89df452411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BitMap">
+      <UniqueIdentifier>{9bcbeb74-95a1-43eb-be1c-7ccf4d44e34f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clean">
+      <UniqueIdentifier>{19a601a0-e0ad-4f86-b332-7aef8c5d6ff7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Clean\Headerfiles">
+      <UniqueIdentifier>{f280371a-c601-451d-b68b-c89227b8cd9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{1c44e380-d2cc-4fab-ab56-56a86daddd6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug\Headerfiles">
+      <UniqueIdentifier>{fc53d84e-af8b-498e-bc20-b4acf833eab8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MFC.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Define.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMfcMain.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgImageTutorialtTird.h">
+      <Filter>DLG\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgArrayTutorialtFour.h">
+      <Filter>DLG\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgPointerTutorialfive.h">
+      <Filter>DLG\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgIninheritanceTutorialSix.h">
+      <Filter>DLG\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSubParent.h">
+      <Filter>DLG\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMsgSeven.h">
+      <Filter>DLG\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgThreadTutorialEight.h">
+      <Filter>DLG\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSocketTutorialNine.h">
+      <Filter>DLG\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="FileProcFun.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSocketTutorialTen.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="InTerrupt.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadProcSocket.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_ComLib.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CGlobal.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ConversionLib.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFileOpenTutorialFirst.h">
+      <Filter>Clean\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgUIControlTutorialSecond.h">
+      <Filter>Debug\Headerfiles</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MFC.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMfcMain.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgImageTutorialtTird.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgArrayTutorialtFour.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgPointerTutorialfive.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgIninheritanceTutorialSix.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSubParent.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMsgSeven.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgThreadTutorialEight.cpp">
+      <Filter>DLG</Filter>
+    </ClCompile>
+    <ClCompile Include="FileProcFun.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSocketTutorialNine.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSocketTutorialTen.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="InTerrupt.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadProcSocket.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ConversionLib.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFileOpenTutorialFirst.cpp">
+      <Filter>Clean</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgUIControlTutorialSecond.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MFC.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\MFC.rc2">
+      <Filter>리소스 파일</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\MFC.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmap1.bmp">
+      <Filter>BitMap</Filter>
+    </Image>
+    <Image Include="img\1.bmp">
+      <Filter>BitMap</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
