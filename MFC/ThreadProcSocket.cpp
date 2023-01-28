@@ -10,16 +10,16 @@ void Text() {
 
 void ThreadProcSocket::First_CreateThread_Collector(SIZE_T size, LPTHREAD_START_ROUTINE APIName, int*& para) {
 	HANDLE h = CreateThread(0, size, APIName, *&para, NULL, 0);
-	InTerrupt::HandleCheckSum_x(h);
+	InTerrupt::HandleCheckSum_Close(h);
 }
 
 void ThreadProcSocket::C_First_CreateThread_Collector(SIZE_T size, LPTHREAD_START_ROUTINE APIName, char*& para) {
 	HANDLE h = CreateThread(0, size, APIName, *&para, NULL, 0);
-	InTerrupt::HandleCheckSum_x(h);
+	InTerrupt::HandleCheckSum_Close(h);
 }
 
 //WS_First_CreateThread_Collector
 void ThreadProcSocket::WS_First_CreateThread_Collector(SIZE_T size, LPTHREAD_START_ROUTINE APIName, wchar_t*& para) {
 	HANDLE h = CreateThread(0, size, APIName, *&para, NULL, 0);
-	InTerrupt::HandleCheckSum_x(h);
+	InTerrupt::HandleCheckSum_Close(h);
 }
