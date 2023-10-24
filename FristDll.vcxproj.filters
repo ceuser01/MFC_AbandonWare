@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="TestDebug">
+      <UniqueIdentifier>{472ffe92-4e9c-42d0-bf0d-0e8ece2858fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestDebug\Headerfiles">
+      <UniqueIdentifier>{ab04ac3c-b4ae-4b86-a946-74fa27df57a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestDebug\소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="FileSystem">
+      <UniqueIdentifier>{2ee7c7c3-e9cc-4c9e-9f0b-3aa0b3a2e5d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thrustmaster">
+      <UniqueIdentifier>{f3960b4c-436c-469c-9db9-3126a5d7896c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Thrustmaster\Headerfiles">
+      <UniqueIdentifier>{62cda9b8-efc0-46ed-8a17-8c391de9eaf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileSystem\Headerfiles">
+      <UniqueIdentifier>{c9a095a8-16b3-4a71-bb44-d388db3966fa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Define.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadProcSocket.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="InTerrupt.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="HIDJoyClass.h">
+      <Filter>TestDebug\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="ConversionLib.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MonitorEnum.h">
+      <Filter>TestDebug\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="FileProcFun.h">
+      <Filter>TestDebug\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="FileFunSecond.h">
+      <Filter>TestDebug\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="HIDDeviceFinder.h">
+      <Filter>Thrustmaster\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="TrustMasterWheelParser.h">
+      <Filter>Thrustmaster\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="JoyClass.h">
+      <Filter>FileSystem\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleController.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>TestDebug\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>TestDebug\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>TestDebug\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadProcSocket.cpp">
+      <Filter>TestDebug\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="InTerrupt.cpp">
+      <Filter>TestDebug\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="HIDJoyClass.cpp">
+      <Filter>TestDebug</Filter>
+    </ClCompile>
+    <ClCompile Include="ConversionLib.cpp">
+      <Filter>TestDebug\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MonitorEnum.cpp">
+      <Filter>TestDebug</Filter>
+    </ClCompile>
+    <ClCompile Include="JoyClass.cpp">
+      <Filter>FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="HIDDeviceFinder.cpp">
+      <Filter>Thrustmaster</Filter>
+    </ClCompile>
+    <ClCompile Include="TrustMasterWheelParser.cpp">
+      <Filter>Thrustmaster</Filter>
+    </ClCompile>
+    <ClCompile Include="FileFunSecond.cpp">
+      <Filter>TestDebug\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FileProcFun.cpp">
+      <Filter>TestDebug\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleController.cpp">
+      <Filter>TestDebug\소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
