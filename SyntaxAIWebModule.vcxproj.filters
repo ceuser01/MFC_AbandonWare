@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\Main">
+      <UniqueIdentifier>{bb4149eb-ab9a-4a43-a593-0b3986a0c502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{3f26f144-60f1-4ed6-8f16-59e59afad505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Main\Headerfiles">
+      <UniqueIdentifier>{e666c7ef-e284-405d-a66b-f27f47cefb47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\cSocket">
+      <UniqueIdentifier>{d3442a96-c0ad-4335-bdce-cf1f2da81ff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\dllmain">
+      <UniqueIdentifier>{3684c5e9-4094-419b-b0f9-e0deb3655738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\dllmain\Headerfiles">
+      <UniqueIdentifier>{9bbe68bc-b29d-4f8e-a9a4-dca55db37443}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Define.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MainBASE.h">
+      <Filter>소스 파일\Main\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="dllmain.h">
+      <Filter>소스 파일\dllmain\Headerfiles</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MainBASE.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>소스 파일\dllmain</Filter>
+    </ClCompile>
+    <ClCompile Include="cHandler.cpp">
+      <Filter>소스 파일\cSocket</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

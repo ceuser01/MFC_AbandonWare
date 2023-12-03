@@ -10,6 +10,5 @@
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
 #include "_Define.h"
-
-
+//_Define
 #endif //PCH_H
