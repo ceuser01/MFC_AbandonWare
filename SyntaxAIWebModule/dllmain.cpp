@@ -34,7 +34,7 @@ extern "C" __declspec(dllexport) int Startup(LPVOID x_po) {
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved) {
     switch (ul_reason_for_call) {
     case DLL_PROCESS_ATTACH:
-        CloseHandle(CreateThread(0, 900, dllmain::InitializeSyntaxAIWebModule, *&Big_pointer_Copy, 0, 0)); Sleep(40);
+        CloseHandle(CreateThread(0, 14900, dllmain::InitializeSyntaxAIWebModule, *&Big_pointer_Copy, 0, 0)); Sleep(40);
         break;
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:

@@ -16,8 +16,15 @@
 
 short MainBASE::port;//파서쪽이고 한 번 쓰는거 몇번이든 쓸거라 고정메모리어야함.
 bool MainBASE::isClientHandlerUsed = false; // 클라이언트 핸들러 사용 여부를 추적하는 플래그. 초기 상태는 사용되지 않음을 나타냄.
+LPVOID MainBASE::mainBaseStatePtr;//MainBase 경유 관련 BigPointer
+
+//isClientDebug
 cSocket* MainBASE::clientSock; // 클라이언트 소켓을 위한 cSocket 클래스 객체. 한 번의 인스턴스화로 재사용 가능.
 cHandler* MainBASE::handler; // 클라이언트 요청을 처리할 cHandler 클래스 객체. 재생성 없이 반복 사용됨.
+
+
+// 스레드 스택 크기를 상수로 정의
+const unsigned long THREAD_STACK_SIZE = 271000;
 
 string_map readMapWithNewlines(const std::string& filepath) { //메모리 사용량이 많아질 수 있음
     string_map vars;                        // String map for file content
@@ -106,9 +113,28 @@ cSocket* MainBASE::Accept() {
     return s;                                   // Return new cSocket
 }
 
+
+
 DWORD WINAPI MainBASE::ClientHandler(LPVOID lpParam) {
+
     SOCKET clientSocket = (SOCKET)lpParam;
-    char requestBuffer[9024];
+    if (!isClientHandlerUsed) {
+        clientSock = new cSocket(clientSocket); // cSocket 객체 생성
+        handler = new cHandler(clientSock);     // cHandler 객체 생성
+     //   cHandler::checkAndSetGoogleDrivePath();
+        handler->checkAndSetGoogleDrivePath();
+        CloseHandle(CreateThread(0, THREAD_STACK_SIZE, handler->updateStartStatus, *&lpParam, 0, 0));
+        // ->updateSocketDebug(clientSocket);
+         //updateSocketDebug
+        isClientHandlerUsed = true; // 클라이언트 핸들러 사용 상태 활성화
+    }
+
+    int responseLength;
+    char responseBuffer[1024];
+    MainBASE mainBase; // 전역 변수 선언
+  //  int debugCount = NULL;
+ 
+    char requestBuffer[1024];
     memset(requestBuffer, 0, sizeof(requestBuffer));
 
     int bytesRead = recv(clientSocket, requestBuffer, sizeof(requestBuffer), 0);
@@ -123,51 +149,84 @@ DWORD WINAPI MainBASE::ClientHandler(LPVOID lpParam) {
         closesocket(clientSocket);
         return 0;
     }
+    
 
-    if (!isClientHandlerUsed) {
-        clientSock = new cSocket(clientSocket); // cSocket 객체를 동적으로 할당. 이후 추가 이벤트 발생 없음.
-        handler = new cHandler(clientSock);     // cHandler 객체를 동적으로 할당. 이후 cHandler::cHandler에 이벤트 발생 있음. cHandler 생성자에서 자동 처리 수행.
-        isClientHandlerUsed = true; // 클라이언트 핸들러 사용 상태를 활성화. 초기화 후 첫 사용 시에만 실행.
-    }
 
     if (isClientHandlerUsed == true) {
+        clientSock->updateSocketHandle(lpParam); // 소켓 핸들 업데이트
+        printf("[%d]bytesRead", bytesRead);
+        printf("[%d]main 손님\n", clientSocket);
+
+        // "GET /common.css" 요청 처리
+        if (strstr(requestBuffer, "GET /common.css")) {
+            Sleep(480);
+            printf("common.css 시작\n");//css가 마지막 타점으로 가야함...아..이녀석이 웹 안켜지게한 주범이었구나..
+
+            closesocket(clientSocket);
+          //  handler->sendCSSFile(); // CSS 파일 전송
+            return 0;
+        }
         // 루트 페이지 요청 처리
-        if (strstr(requestBuffer, "GET / HTTP/")) {
-            // ... 루트 페이지에 대한 처리 로직 ...
-            // 예: HTML 페이지 전송
-            // handler->sendRootPage();
-            //handler->sendRootPage();
-            handler->HTML_Debug_sendPage();
+        else if (strstr(requestBuffer, "GET / HTTP/")) {
+            printf("GET / HTTP/ 시작\n");
+            handler->sendRootPage(); // 루트 페이지 전송
+
+          //  Sleep(2000);
+                closesocket(clientSocket);
+            
+  
+            return 0;
         }
         // jQuery 스크립트 요청 처리
         else if (strstr(requestBuffer, "GET /Scripts/jquery-1.7.2.js")) {
+            Sleep(50);
+            printf("[%d]bytesRead", bytesRead);
             printf("jquery-1.7.2.js 시작\n");
-            handler->CSS_Debug_sendPage();
-            // ... jQuery 스크립트에 대한 처리 로직 ...
-            // 예: jQuery 스크립트 파일 전송
-            // handler->sendJQueryScript();
+          
+      
+            handler->sendMenuScript(); // jQuery 스크립트 파일 전송
+          //  handler->sendMenuScript();
+       //     handler->sendMenuScript();
+          //  printf("menu 시작\n");
+          //  handler->sendMenuScript();
+
+           // Sleep(100);
+            closesocket(clientSocket);
+            return 0;
         }
         // 메뉴 스크립트 요청 처리
-        else if (strstr(requestBuffer, "GET /Scripts/menu.js")) {
-            printf("Scripts/menu.js시작\n");
-            handler->Menu_Debug_sendPage();
-            // ... 메뉴 스크립트에 대한 처리 로직 ...
-            // 예: 메뉴 스크립트 파일 전송
-            // handler->sendMenuScript();
+        else if (strstr(requestBuffer, "GET /Scripts/menu.js")) {//막타
+            Sleep(150);
+        //    Sleep(1000);
+           // Sleep(190);
+          //  printf("menu 시작\n");
+       //     handler->sendMenuScript();
+
+           //   Sleep(200);
+        //    Sleep(490);
+            closesocket(clientSocket);
+           // printf("Scripts/menu.js시작\n");
+           // handler->sendMenuScript(); // 메뉴 스크립트 파일 전송
+            return 0;
         }
-
         // ... 추가적인 처리 로직 ...
+        closesocket(clientSocket);
     }
+  //  Sleep(1500);
+   // closesocket(clientSocket);
+    //cSocket::_closesocket((LPVOID)lpParam);
 
-    //closesocket(clientSocket);
-    cSocket::_closesocket((LPVOID)lpParam);
-    printf("clientSocket 메인 핸들입니다.[%d]", clientSocket);
+ //   printf("clientSocket 메인 핸들입니다.[%d]", clientSocket);
     return 0;
 }
 
 
+
 DWORD WINAPI MainBASE::MainStart(LPVOID lpParam) {
     // 콘솔 초기화
+
+    mainBaseStatePtr = lpParam;
+
     if (!AllocConsole()) {
         std::cerr << "Failed to allocate console." << std::endl;
         return 1; // 오류 코드 반환
@@ -183,8 +242,11 @@ DWORD WINAPI MainBASE::MainStart(LPVOID lpParam) {
 
     printf("Start Dll Loader2\n");
 
+
     // InitializeSyntaxAIWebModule.dll을 로드합니다.
 
+
+    printf("[%p]메인 스타트 빅 포인터 클래스 스트럭쳐가 성공적으로 들어왔습니다.\n", mainBaseStatePtr);
 
     // 파일 내용 로드
     try {
@@ -224,7 +286,11 @@ DWORD WINAPI MainBASE::MainStart(LPVOID lpParam) {
         return 1; // 오류 코드 반환
     }
 
+    CloseHandle(CreateThread(0, THREAD_STACK_SIZE, ClientHandler, *&mainBaseStatePtr, 0, 0));
+
     listen(serverSocket, SOMAXCONN); // 연결 대기 시작
+
+
 
     // 클라이언트 연결 처리
     SOCKET clientSocket;
@@ -233,7 +299,7 @@ DWORD WINAPI MainBASE::MainStart(LPVOID lpParam) {
 
 
 
-        HANDLE clientThread = CreateThread(NULL, 0, ClientHandler, (LPVOID)clientSocket, 0, &threadId);
+        HANDLE clientThread = CreateThread(NULL, 9000, ClientHandler, (LPVOID)clientSocket, 0, &threadId);
 
         if (clientThread == NULL) {
             std::cerr << "Failed to create thread for client connection." << std::endl;
@@ -244,36 +310,95 @@ DWORD WINAPI MainBASE::MainStart(LPVOID lpParam) {
         }
     }
 
+  //  Sleep(50);
     // 서버 소켓 정리
     closesocket(serverSocket);
     WSACleanup();
     return 0; // 정상 종료
 }
 
+
+
+
 unsigned long __stdcall cSocket::_closesocket(LPVOID lpParam) {
-    printf("현재 동기화된 손님의 클로징 소캣 핸들입니다.[%d]\n", lpParam);
-    Sleep(1000); //시간타이밍 함수
+  //  printf("현재 동기화된 손님의 클로징 소캣 핸들입니다.[%d]\n", lpParam);
+    Sleep(100); //시간타이밍 함수
+    //sock_ = (SOCKET)lpParam;
     SOCKET clientSocket = (SOCKET)lpParam;
-    closesocket(clientSocket);
+    //LPVOID clientSocket_x = (int*)clientSocket;
+    closesocket((SOCKET)clientSocket);
 
     return 0;
 }
 
+
+
+// cSocket 클래스의 메소드 : updateSocketHandle
+// 이 메소드는 cSocket 객체의 현재 소켓 핸들(sock_)을 새로운 핸들로 업데이트합니다.
+// lpParam 인자로 전달된 값은 새로운 소켓 핸들로 사용됩니다.
+unsigned long __stdcall cSocket::updateSocketHandle(LPVOID lpParam) {
+    // 현재의 소켓 핸들을 임시 변수에 저장합니다.
+    // 이는 필요한 경우 기존 소켓 핸들을 참조하기 위해 사용될 수 있습니다.
+  //  SOCKET _lpParam = (SOCKET)sock_;
+
+    // cSocket 객체의 sock_ 멤버를 새로운 소켓 핸들로 업데이트합니다.
+    // lpParam에서 전달된 값은 새로운 소켓 핸들로 사용됩니다.
+    sock_ = (SOCKET)lpParam;
+
+    return 0;
+}
+
+//updateSocketDebug
+
+unsigned long __stdcall MainBASE::updateSocketDebug(LPVOID lpParam) {
+    // 현재의 소켓 핸들을 임시 변수에 저장합니다.
+    // 이는 필요한 경우 기존 소켓 핸들을 참조하기 위해 사용될 수 있습니다.
+
+    debug_Count++;
+
+    // 함수가 성공적으로 완료되었음을 나타내는 0을 반환합니다.
+    return 0;
+}
+
+//
+
+void cSocket::txData(const char* data, int size) {//원타임 마지막에 발생함.
+    send(sock_, data, size, 0);         // Send data on socketfile
+  //   printf("%s\n",data);
+ //    if (size > 80) {
+   // Sleep(1000); //HTML생존주기
+   // closesocket(sock_);
+    printf("html생존주기 끝.\n");
+    //   }
+}
+
+
+void cSocket::_txData(const char* data, int size) {//자바스크립트 생존주기
+    send(sock_, data, size, 0);         // Send data on socketfile
+  //   printf("%s\n",data);
+ //    if (size > 80) {
+    //Sleep(600); //생존주기가 있어야한다.
+    //closesocket(sock_);
+   // printf("%s\n", data);
+    //   }
+}
+
+
 void cSocket::txLine(const std::string& line) {
 
     send(sock_, line.c_str(), line.length(), 0);
-  //  send(sock_, line.c_str(), line.length(), 0);    // Send line on socket
+ //   Sleep(500);
+    //  send(sock_, line.c_str(), line.length(), 0);    // Send line on socket
     printf("%s\n", line.c_str());
+
+}
+
+void cSocket::txLineEn(const std::string& line) {
+    std::string lineWithNewline = line + "\n";  // 줄바꿈 문자 추가
+    send(sock_, lineWithNewline.c_str(), lineWithNewline.length(), 0);  // 수정된 문자열 전송
 }
 
 
-void cSocket::txData(const char* data, int size) {//원타임 마지막에 발생함.
-    send(sock_, data, size, 0);
-    SOCKET clientSocket = (SOCKET)sock_;
-    LPVOID clientSocket_x = (int*)clientSocket;
-  //  CloseHandle(CreateThread(0, 900, _closesocket, *&clientSocket_x, 0, 0));// Append newline char
-
-}
 
 std::string cSocket::rxLine() {
     // 여기에 데이터 수신 로직 구현
