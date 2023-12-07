@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\Main">
+      <UniqueIdentifier>{4fabdb5c-7261-4bae-bbb6-497068c78948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Main\Headerfiles">
+      <UniqueIdentifier>{6be9a902-56e9-49ee-ad31-3a40ea6398e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Debug">
+      <UniqueIdentifier>{aaf18d16-79e4-473f-bd05-2ea8cc0e92c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Debug\Refactoring incomplete code">
+      <UniqueIdentifier>{51c6f6ee-643d-4325-a6fd-ee38349aa0f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Debug\Refactoring incomplete code\Headerfiles">
+      <UniqueIdentifier>{ca37f349-fce9-4885-85be-b078fbc8f758}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ComplexLibWebSync">
+      <UniqueIdentifier>{e36397a2-88b1-413c-9ef6-ff08262cba41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\ComplexLibWebSync\Headerfiles">
+      <UniqueIdentifier>{6ff98437-2dae-461f-a0ea-e940eb138213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Dumy">
+      <UniqueIdentifier>{3ebfd85c-b419-4ff8-b335-e699b2d9e1bb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ComplexLibWebSync.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DllLoadCollector.h">
+      <Filter>소스 파일\Main\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="_Define.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LaserScanWebTransmitte.h">
+      <Filter>소스 파일\Debug\Refactoring incomplete code\Headerfiles</Filter>
+    </ClInclude>
+    <ClInclude Include="ComplexLibWebSyncDlg.h">
+      <Filter>소스 파일\ComplexLibWebSync\Headerfiles</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DllLoadCollector.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="LaserScanWebTransmitte.cpp">
+      <Filter>소스 파일\Debug\Refactoring incomplete code</Filter>
+    </ClCompile>
+    <ClCompile Include="ComplexLibWebSyncDlg.cpp">
+      <Filter>소스 파일\ComplexLibWebSync</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="ComplexLibWebSync.cpp">
+      <Filter>소스 파일\Dumy</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ComplexLibWebSync.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\ComplexLibWebSync.rc2">
+      <Filter>리소스 파일</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\ComplexLibWebSync.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
