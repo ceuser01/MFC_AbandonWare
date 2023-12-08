@@ -1,5 +1,5 @@
 #pragma once
-
+#include "CRC32.h"
 #include <windows.h>//지워도 작동은 하는데 일단 냅둠.
 #include <atlstr.h>//지워도 작동은 하는데 일단 냅둠.
 #include <iostream>//지워도 작동 하는데 일단 냅둠.
@@ -56,6 +56,9 @@ private:
     Page page_;
 
 public:
+
+    // 또는 C++11 이상에서는 아래와 같이 사용할 수도 있습니다.
+
     cHandler(cSocket* sock);
     ~cHandler();
     void handleRequest();
@@ -88,20 +91,24 @@ public:
     //plugin_Debug_sendPage
     //sendMenuScript
     //sendRootPage
+    void CheckFileAndDisplayMessage();
+
+
+    int32  CalculateFileCRC32(const std::string& crc32ValidationFilePath);
 public:
     static LPVOID handlerContextPtr;
     static int isClientDebugCountFrist; // 클라이언트 핸들러 사용 여부를 추적하는 플래그. 초기 상태는 사용되지 않음을 나타냄.
     static int isClientDebugCountSecond; // 클라이언트 핸들러 사용 여부를 추적하는 플래그. 초기 상태는 사용되지 않음을 나타냄.
-
 
     static int CheckReuseHtml;
     static int isScriptReused;
     //isScriptReused
 
     static std::string webServiceImagePath;
-
-    static std::string contentLengthStr;
-    static std::string contentLengthStr_;
+    static std::string crc32ValidationFilePath;
+    //crc32ValidationFilePath
+    static std::string calculatedCrc32Checksum;
+    // //calculatedCrc32Checksum
     // 버퍼
     static char* webServiceBuffer;
     // 파일 크기
@@ -114,6 +121,11 @@ public:
 
     // 컨텐츠 길이 문자열
     static std::string webServiceContentLengthStr;
+
+    // 컨텐츠 길이 문자열
+    static std::string rootPageContentLength;
+    static std::string jQueryScriptContentLength;
+
 
     static int isMenuScriptLoaded; // 변경된 변수 이름
     static char* menuScriptBuffer; // 변경된 변수 이름
@@ -137,6 +149,7 @@ public:
     cSocket* Accept();
     void StartTCPServer(int port);
     void StopTCPServer();
+
 public:
     static LPVOID mainBaseStatePtr;
 

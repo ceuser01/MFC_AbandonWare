@@ -1,11 +1,15 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(499,5): warning MSB8004: Output 디렉터리가 슬래시로 끝나지 않습니다. Output 디렉터리의 적절한 평가를 허용하는 데 필요하므로 이 빌드 인스턴스에서 슬래시를 추가합니다.
   pch.cpp
   cHandler.cpp
-C:\Users\nninn\OneDrive\바탕 화면\ComplexLibWe434343bSync\ComplexLibWebSync\SyntaxAIWebModule\cHandler.cpp(479,12): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'cSocket *'입니다.
+C:\Users\nninn\OneDrive\바탕 화면\43ComplexLibWeb43Sync\ComplexLibWebSync\SyntaxAIWebModule\cHandler.cpp(170,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\nninn\OneDrive\바탕 화면\43ComplexLibWeb43Sync\ComplexLibWebSync\SyntaxAIWebModule\cHandler.cpp(189,19): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\nninn\OneDrive\바탕 화면\43ComplexLibWeb43Sync\ComplexLibWebSync\SyntaxAIWebModule\cHandler.cpp(523,12): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'cSocket *'입니다.
+  CRC32.cpp
   dllmain.cpp
   MainBASE.cpp
-C:\Users\nninn\OneDrive\바탕 화면\ComplexLibWe434343bSync\ComplexLibWebSync\SyntaxAIWebModule\MainBASE.cpp(133,10): warning C4101: 'responseBuffer' :참조되지 않은 지역 변수입니다.
-C:\Users\nninn\OneDrive\바탕 화면\ComplexLibWe434343bSync\ComplexLibWebSync\SyntaxAIWebModule\MainBASE.cpp(132,9): warning C4101: 'responseLength' :참조되지 않은 지역 변수입니다.
+C:\Users\nninn\OneDrive\바탕 화면\43ComplexLibWeb43Sync\ComplexLibWebSync\SyntaxAIWebModule\MainBASE.cpp(132,30): warning C4244: '인수': 'std::streamsize'에서 'const unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\nninn\OneDrive\바탕 화면\43ComplexLibWeb43Sync\ComplexLibWebSync\SyntaxAIWebModule\MainBASE.cpp(205,10): warning C4101: 'responseBuffer' :참조되지 않은 지역 변수입니다.
+C:\Users\nninn\OneDrive\바탕 화면\43ComplexLibWeb43Sync\ComplexLibWebSync\SyntaxAIWebModule\MainBASE.cpp(204,9): warning C4101: 'responseLength' :참조되지 않은 지역 변수입니다.
   코드를 생성하고 있습니다...
-     C:\Users\nninn\OneDrive\바탕 화면\ComplexLibWe434343bSync\ComplexLibWebSync\SyntaxAIWebModule\..\WebServer\SyntaxAIWebModule.lib 라이브러리 및 C:\Users\nninn\OneDrive\바탕 화면\ComplexLibWe434343bSync\ComplexLibWebSync\SyntaxAIWebModule\..\WebServer\SyntaxAIWebModule.exp 개체를 생성하고 있습니다.
-  SyntaxAIWebModule.vcxproj -> C:\Users\nninn\OneDrive\바탕 화면\ComplexLibWe434343bSync\ComplexLibWebSync\WebServer\SyntaxAIWebModule.dll
+     C:\Users\nninn\OneDrive\바탕 화면\43ComplexLibWeb43Sync\ComplexLibWebSync\SyntaxAIWebModule\..\WebServer\SyntaxAIWebModule.lib 라이브러리 및 C:\Users\nninn\OneDrive\바탕 화면\43ComplexLibWeb43Sync\ComplexLibWebSync\SyntaxAIWebModule\..\WebServer\SyntaxAIWebModule.exp 개체를 생성하고 있습니다.
+  SyntaxAIWebModule.vcxproj -> C:\Users\nninn\OneDrive\바탕 화면\43ComplexLibWeb43Sync\ComplexLibWebSync\WebServer\SyntaxAIWebModule.dll

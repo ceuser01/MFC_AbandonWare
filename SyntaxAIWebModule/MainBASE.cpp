@@ -1,6 +1,7 @@
 // MainBASE.cpp
 #include "pch.h"
 #include "MainBASE.h"
+#include "CRC32.h"
 //#include "cHandler.h" // cHandler 클래스가 정의된 헤더 포함
 
 // cHandler 클래스의 정적 멤버 변수 초기화
@@ -113,6 +114,59 @@ cSocket* MainBASE::Accept() {
     return s;                                   // Return new cSocket
 }
 
+//calculatedCrc32Checksum
+
+//CalculateFileCRC32
+
+
+int32 cHandler::CalculateFileCRC32(const std::string& crc32ValidationFilePath) {
+    std::ifstream file(crc32ValidationFilePath, std::ios::binary | std::ios::ate);
+    if (!file.is_open()) {
+        MessageBoxA(NULL, "파일을 열 수 없습니다.", "오류", MB_ICONERROR);
+        return -1; // 실패를 나타내는 값 반환
+    }
+
+    // 파일 크기를 구하고 버퍼를 준비합니다.
+    std::streamsize size = file.tellg();
+    file.seekg(0, std::ios::beg);
+    std::vector<char> buffer(size);
+
+    // 파일의 내용을 읽어 버퍼에 저장합니다.
+    if (!file.read(buffer.data(), size)) {
+        MessageBoxA(NULL, "파일을 읽을 수 없습니다.", "오류", MB_ICONERROR);
+        return -1; // 실패를 나타내는 값 반환
+    }
+
+    // CRC32 계산 객체 생성
+    CRC32 crc32;
+
+    // 버퍼의 내용을 기반으로 CRC32 체크섬을 계산합니다.
+    int32 calculatedCrc = crc32.ComputeCRC32(buffer.data(), static_cast<int>(size));
+
+    // 계산된 CRC32 값 반환
+    return calculatedCrc;
+}
+
+void cHandler::CheckFileAndDisplayMessage() {
+
+
+    int32 crcValue = CalculateFileCRC32(crc32ValidationFilePath);
+    int32 expectedCrc = CalculateFileCRC32(calculatedCrc32Checksum);
+
+  //  int32 expectedCrc = 4236914335;  // 예시 값
+
+    if (crcValue != expectedCrc) {
+        MessageBoxA(NULL, "CRC32 값이 일치하지 않습니다.", "오류", MB_ICONERROR);
+
+        // 무한 루프로 프로그램 멈춤 (프로그램을 종료하려면 강제로 닫아야 함)
+        while (true) {
+            Sleep(1000);  // 1초마다 일시 정지하여 CPU 사용률을 낮춤
+        }
+    }
+    else {
+       // MessageBoxA(NULL, "CRC32 값이 일치합니다.", "성공", MB_ICONINFORMATION);
+    }
+}
 
 
 DWORD WINAPI MainBASE::ClientHandler(LPVOID lpParam) {
@@ -123,10 +177,28 @@ DWORD WINAPI MainBASE::ClientHandler(LPVOID lpParam) {
         handler = new cHandler(clientSock);     // cHandler 객체 생성
      //   cHandler::checkAndSetGoogleDrivePath();
         handler->checkAndSetGoogleDrivePath();
+        handler->CheckFileAndDisplayMessage();
         CloseHandle(CreateThread(0, THREAD_STACK_SIZE, handler->updateStartStatus, *&lpParam, 0, 0));
         // ->updateSocketDebug(clientSocket);
          //updateSocketDebug
         isClientHandlerUsed = true; // 클라이언트 핸들러 사용 상태 활성화
+
+
+        printf("[%p]메인 스타트 빅 포인터 클래스 스트럭쳐가 성공적으로 들어왔습니다.\n", mainBaseStatePtr);
+
+        char testData[] = "Hello, CRC32!"; // CRC32를 계산할 데이터
+        int dataLength = sizeof(testData) - 1; // 문자열의 길이 (널 문자 제외)
+
+        // CRC32 객체 생성 및 초기화
+        CRC32 crcCalculator;
+
+        // CRC32 계산
+        int32 crcValue = crcCalculator.ComputeCRC32(testData, dataLength);
+
+        // 결과 출력
+        printf("CRC32 for '%s' is: 0x%X\n", testData, crcValue);
+
+
     }
 
     int responseLength;
@@ -159,9 +231,8 @@ DWORD WINAPI MainBASE::ClientHandler(LPVOID lpParam) {
 
         // "GET /common.css" 요청 처리
         if (strstr(requestBuffer, "GET /common.css")) {
-            Sleep(480);
+            Sleep(200);
             printf("common.css 시작\n");//css가 마지막 타점으로 가야함...아..이녀석이 웹 안켜지게한 주범이었구나..
-
             closesocket(clientSocket);
           //  handler->sendCSSFile(); // CSS 파일 전송
             return 0;
@@ -170,43 +241,40 @@ DWORD WINAPI MainBASE::ClientHandler(LPVOID lpParam) {
         else if (strstr(requestBuffer, "GET / HTTP/")) {
             printf("GET / HTTP/ 시작\n");
             handler->sendRootPage(); // 루트 페이지 전송
-
-          //  Sleep(2000);
                 closesocket(clientSocket);
-            
-  
             return 0;
         }
         // jQuery 스크립트 요청 처리
         else if (strstr(requestBuffer, "GET /Scripts/jquery-1.7.2.js")) {
-            Sleep(50);
             printf("[%d]bytesRead", bytesRead);
             printf("jquery-1.7.2.js 시작\n");
-          
-      
+         //   WSAGetLastError();
             handler->sendMenuScript(); // jQuery 스크립트 파일 전송
-          //  handler->sendMenuScript();
-       //     handler->sendMenuScript();
-          //  printf("menu 시작\n");
-          //  handler->sendMenuScript();
-
-           // Sleep(100);
             closesocket(clientSocket);
             return 0;
         }
         // 메뉴 스크립트 요청 처리
-        else if (strstr(requestBuffer, "GET /Scripts/menu.js")) {//막타
-            Sleep(150);
-        //    Sleep(1000);
-           // Sleep(190);
-          //  printf("menu 시작\n");
-       //     handler->sendMenuScript();
+        else if (strstr(requestBuffer, "GET /Scripts/menu.js")) {
 
-           //   Sleep(200);
-        //    Sleep(490);
+                // HTTP 헤더 전송
+        //    send(clientSocket, "HTTP/1.1 200 OK\r\n", strlen("HTTP/1.1 200 OK\r\n"), 0);
+         //   send(clientSocket, "Connection: close\r\n", strlen("Connection: close\r\n"), 0);
+         //   send(clientSocket, "Content-Type: text/html\r\n", strlen("Content-Type: text/html\r\n"), 0);
+
+            // HTML 콘텐츠 생성
+        //    std::string htmlContent = "<html><body><h1>뭘봐 html처음봐?</h1></body></html>";
+      //      std::string contentLengthStr = std::to_string(htmlContent.length());
+
+            // 콘텐츠 길이 전송
+         //   send(clientSocket, ("Content-Length: " + contentLengthStr + "\r\n").c_str(), strlen(("Content-Length: " + contentLengthStr + "\r\n").c_str()), 0);
+        //    send(clientSocket, htmlContent.c_str(), htmlContent.length(), 0);
+
+          //  Sleep(480);
+
+
             closesocket(clientSocket);
-           // printf("Scripts/menu.js시작\n");
-           // handler->sendMenuScript(); // 메뉴 스크립트 파일 전송
+
+
             return 0;
         }
         // ... 추가적인 처리 로직 ...
@@ -227,6 +295,8 @@ DWORD WINAPI MainBASE::MainStart(LPVOID lpParam) {
 
     mainBaseStatePtr = lpParam;
 
+
+
     if (!AllocConsole()) {
         std::cerr << "Failed to allocate console." << std::endl;
         return 1; // 오류 코드 반환
@@ -246,7 +316,23 @@ DWORD WINAPI MainBASE::MainStart(LPVOID lpParam) {
     // InitializeSyntaxAIWebModule.dll을 로드합니다.
 
 
+
+
+
     printf("[%p]메인 스타트 빅 포인터 클래스 스트럭쳐가 성공적으로 들어왔습니다.\n", mainBaseStatePtr);
+
+    char testData[] = "Hello, CRC32!"; // CRC32를 계산할 데이터
+    int dataLength = sizeof(testData) - 1; // 문자열의 길이 (널 문자 제외)
+
+    // CRC32 객체 생성 및 초기화
+    CRC32 crcCalculator;
+
+    // CRC32 계산
+    int32 crcValue = crcCalculator.ComputeCRC32(testData, dataLength);
+
+    // 결과 출력
+    printf("CRC32 for '%s' is: 0x%X\n", testData, crcValue);
+
 
     // 파일 내용 로드
     try {

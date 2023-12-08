@@ -11,16 +11,19 @@
 LPVOID cHandler::handlerContextPtr; // MainBase 경유 관련 BigPointer
 
 std::string cHandler::webServiceImagePath; // 웹 서비스 이미지 경로
+std::string cHandler::crc32ValidationFilePath; // CRC32 기본 베이스 경로
+std::string cHandler::calculatedCrc32Checksum; // CRC32 기본 베이스 경로
+//calculatedCrc32Checksum
+
+
 char* cHandler::webServiceBuffer = nullptr; // 웹 서비스 이미지 버퍼
 DWORD cHandler::webServiceFileSize = 0; // 웹 서비스 이미지 파일 크기
 int cHandler::CheckReuseHtml = 0; // HTML 재사용 여부 체크
 
 std::string cHandler::webServiceContentLengthStr = ""; // 웹 서비스 컨텐츠 길이 문자열
 
-//contentLengthStr
-std::string cHandler::contentLengthStr = ""; // 웹 서비스 컨텐츠 길이 문자열
-//contentLengthStr_
-std::string cHandler::contentLengthStr_ = ""; // 웹 서비스 컨텐츠 길이 문자열
+std::string cHandler::rootPageContentLength = ""; // rootPageContentLength 서비스 컨텐츠 길이 문자열
+std::string cHandler::jQueryScriptContentLength = ""; // jQueryScriptContentLength 웹 서비스 컨텐츠 길이 문자열
 
 const DWORD THREAD_STACK_SIZE = 32900;  // 쓰레드 스택 크기
 // 스레드 스택 크기를 상수로 정의
@@ -110,6 +113,8 @@ void cHandler::sendPngImage() {
 void cHandler::checkAndSetGoogleDrivePath() {
     const std::string googleDriveFolder = "\\내 드라이브";
     const std::string indexPath = "\\index.html";
+    const std::string indexPathCRC = "\\ConfigCRC32.ini";
+    const std::string indexPathCRCSum = "\\FileChecksums.ini";
     DWORD drives = GetLogicalDrives();
 
     for (char drive = 'C'; drive <= 'Z'; ++drive) {
@@ -117,6 +122,8 @@ void cHandler::checkAndSetGoogleDrivePath() {
             std::string drivePath = std::string(1, drive) + ":\\" + googleDriveFolder;
             if (GetFileAttributesA(drivePath.c_str()) != INVALID_FILE_ATTRIBUTES) {
                 webServiceImagePath = drivePath + indexPath;
+                crc32ValidationFilePath = drivePath + indexPathCRC;
+                calculatedCrc32Checksum = drivePath + indexPathCRCSum;
                 std::cout << "경로 설정: " << webServiceImagePath << std::endl;
                 return;
             }
@@ -126,7 +133,6 @@ void cHandler::checkAndSetGoogleDrivePath() {
     std::cout << "구글 드라이브 경로를 찾을 수 없습니다." << std::endl;
 }
 
-static std::string contentLengthStr_;
 void cHandler::sendRootPage() {
     // 이미지 파일 경로
 
@@ -134,19 +140,58 @@ void cHandler::sendRootPage() {
   
 
     
-    contentLengthStr_ = std::to_string(webServiceFileSize);
+    rootPageContentLength = std::to_string(webServiceFileSize);
 
     SOCKET socketHandle = page_.sock_->getSocketHandle(); // cSocket 인스턴스로부터 소켓 핸들을 가져옵니다.
 
    // HTTP 헤더 전송
+    std::string htmlContent = "AbandonWare";
     send(socketHandle, "HTTP/1.1 200 OK\r\n", strlen("HTTP/1.1 200 OK\r\n"), 0);
     send(socketHandle, "Connection: close\r\n", strlen("Connection: close\r\n"), 0);
     send(socketHandle, "Content-Type: text/html\r\n", strlen("Content-Type: text/html\r\n"), 0);
-    send(socketHandle, ("Content-Length: " + contentLengthStr_ + "\r\n").c_str(), strlen(("Content-Length: " + contentLengthStr_ + "\r\n").c_str()), 0);
+    send(socketHandle, ("Content-Length: " + rootPageContentLength + htmlContent+ "\r\n").c_str(), strlen(("Content-Length: " + rootPageContentLength + htmlContent + "\r\n").c_str()), 0);
     send(socketHandle, "\r\n", strlen("\r\n"), 0);
 
+
+   // std::string contentLengthStr = std::to_string(htmlContent.length());
+
+    // 콘텐츠 길이 전송
+ //   send(clientSocket, ("Content-Length: " + contentLengthStr + "\r\n").c_str(), strlen(("Content-Length: " + contentLengthStr + "\r\n").c_str()), 0);
+
+
+
     // 웹 서비스 버퍼 데이터 전송
-    send(socketHandle, webServiceBuffer, webServiceFileSize, 0);
+    const int MAX_RETRY_COUNT = 5;  // 최대 재시도 횟수
+    const int RETRY_INTERVAL_MS = 100;  // 재시도 간격 (밀리초)
+
+    int bytesSent = 0;  // 전송된 바이트 수
+    int retryCount = 0;  // 현재 재시도 횟수
+
+    while (bytesSent < webServiceFileSize && retryCount < MAX_RETRY_COUNT) {
+        int result = send(socketHandle, webServiceBuffer + bytesSent, webServiceFileSize - bytesSent, 0);
+
+        if (result > 0) {
+            bytesSent += result;  // 성공적으로 전송된 바이트 수 업데이트
+        }
+        else if (result == SOCKET_ERROR) {
+            if (WSAGetLastError() == WSAEWOULDBLOCK) {
+                // 네트워크가 바쁘다는 신호, 잠시 대기 후 재시도
+                Sleep(RETRY_INTERVAL_MS);
+                retryCount++;
+            }
+            else {
+                // 기타 네트워크 오류
+                break;
+            }
+        }
+    }
+
+    if (bytesSent < webServiceFileSize) {
+        // 전체 데이터가 전송되지 않았음을 처리
+        printf("AbandonWareError");
+    }
+
+   // send(socketHandle, htmlContent.c_str(), htmlContent.length(), 0);
 
 }
 
@@ -225,7 +270,6 @@ void cHandler::sendJQueryScript() {
 //plugin_Debug_sendPage
 
 
-
 void cHandler::sendMenuScript() {
 
 
@@ -241,7 +285,7 @@ void cHandler::sendMenuScript() {
         send(socketHandle, "HTTP/1.1 200 OK\r\n", strlen("HTTP/1.1 200 OK\r\n"), 0);
         send(socketHandle, "Connection: close\r\n", strlen("Connection: close\r\n"), 0);
         send(socketHandle, "Content-Type: application/javascript\r\n", strlen("Content-Type: application/javascript\r\n"), 0);
-        send(socketHandle, ("Content-Length: " + contentLengthStr + "\r\n").c_str(), strlen(("Content-Length: " + contentLengthStr + "\r\n").c_str()), 0);
+        send(socketHandle, ("Content-Length: " + jQueryScriptContentLength + "\r\n").c_str(), strlen(("Content-Length: " + jQueryScriptContentLength + "\r\n").c_str()), 0);
         send(socketHandle, "\r\n", strlen("\r\n"), 0);
 
         // 메뉴 스크립트 데이터 전송

@@ -48,6 +48,9 @@
     <ClInclude Include="dllmain.h">
       <Filter>소스 파일\dllmain\Headerfiles</Filter>
     </ClInclude>
+    <ClInclude Include="CRC32.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -61,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="cHandler.cpp">
       <Filter>소스 파일\cSocket</Filter>
+    </ClCompile>
+    <ClCompile Include="CRC32.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
