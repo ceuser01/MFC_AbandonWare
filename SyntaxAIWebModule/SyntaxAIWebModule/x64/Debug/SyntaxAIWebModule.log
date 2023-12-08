@@ -1,0 +1,11 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(499,5): warning MSB8004: Output 디렉터리가 슬래시로 끝나지 않습니다. Output 디렉터리의 적절한 평가를 허용하는 데 필요하므로 이 빌드 인스턴스에서 슬래시를 추가합니다.
+  pch.cpp
+  cHandler.cpp
+C:\Users\nninn\OneDrive\바탕 화면\ComplexLibWebSync (2)\ComplexLibWebSync\SyntaxAIWebModule\cHandler.cpp(56,12): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'cSocket *'입니다.
+C:\Users\nninn\OneDrive\바탕 화면\ComplexLibWebSync (2)\ComplexLibWebSync\SyntaxAIWebModule\cHandler.cpp(56,12): warning C4313: 'printf': 서식 문자열의 '%d'이(가) 인수 1('cSocket *' 형식)과(와) 충돌합니다.
+  dllmain.cpp
+  MainBASE.cpp
+C:\Users\nninn\OneDrive\바탕 화면\ComplexLibWebSync (2)\ComplexLibWebSync\SyntaxAIWebModule\MainBASE.cpp(233,47): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+     C:\Users\nninn\OneDrive\바탕 화면\ComplexLibWebSync (2)\ComplexLibWebSync\SyntaxAIWebModule\..\WebServer64\SyntaxAIWebModule.lib 라이브러리 및 C:\Users\nninn\OneDrive\바탕 화면\ComplexLibWebSync (2)\ComplexLibWebSync\SyntaxAIWebModule\..\WebServer64\SyntaxAIWebModule.exp 개체를 생성하고 있습니다.
+  SyntaxAIWebModule.vcxproj -> C:\Users\nninn\OneDrive\바탕 화면\ComplexLibWebSync (2)\ComplexLibWebSync\WebServer64\SyntaxAIWebModule.dll
